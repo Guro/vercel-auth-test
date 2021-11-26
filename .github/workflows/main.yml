@@ -27,4 +27,5 @@ jobs:
           vercel-org-id: ${{ secrets.ORG_ID}}  #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required 
           github-comment: "true"
+          github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
           # working-directory: ./sub-directory
