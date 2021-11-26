@@ -26,5 +26,5 @@ jobs:
           # vercel-args: '--prod' #Optional
           vercel-org-id: ${{ secrets.ORG_ID}}  #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required 
-          github-comment: "Hello world"
+          github-comment: "true"
           # working-directory: ./sub-directory
