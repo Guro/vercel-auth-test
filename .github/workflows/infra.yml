@@ -1,0 +1,20 @@
+name: Infra deploy
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v2.4.1
+      - uses: actions/checkout@v2
+      - uses: serverless/github-action@master
+      - name: Deploy aurora
+        run: cd infra/aurora/ && serverless deploy
+
+      - name: Test
+        run: cd app && npm run test
+    env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
