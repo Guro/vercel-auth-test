@@ -1,0 +1,84 @@
+Resources:
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+      - Key: "Name"
+        Value: "EagerEagle-InternetGateway"
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      CidrBlock: 10.0.0.0/16
+      Tags:
+        - Key: "Name"
+          Value: "EagerEagle-VPC"
+
+  RouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+      - Key: "Name"
+        Value: "EagerEagle-RouteTable"
+
+  InternetGatewayRoute:
+      Type: AWS::EC2::Route
+      Properties:
+        RouteTableId: !Ref RouteTable
+        DestinationCidrBlock: 0.0.0.0/0
+        GatewayId: !Ref InternetGateway
+
+  InternetGatewayVpcAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties: 
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
+
+  SubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: ${self:provider.region}a
+      CidrBlock: 10.0.0.0/24
+      Tags:
+        - Key: "Name"
+          Value: "EagerEagle-SubnetA"
+
+  SubnetARouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref RouteTable
+      SubnetId: !Ref SubnetA
+
+  SubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      AvailabilityZone: ${self:provider.region}b
+      CidrBlock: 10.0.1.0/24
+      Tags:
+        - Key: "Name"
+          Value: "EagerEagle-SubnetB"
+
+  SubnetBRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref RouteTable
+      SubnetId: !Ref SubnetB
+
+  RDSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "EagerEagle Security group for RDS"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: "0.0.0.0/0"
+      Tags:
+        - Key: "Name"
+          Value: "EagerEagle--RDSSecurityGroup"

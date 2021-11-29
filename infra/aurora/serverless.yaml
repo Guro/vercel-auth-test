@@ -2,7 +2,9 @@ service: aurora
 provider:
   name: aws
   region: eu-central-1
-functions:
+
 
 resources:
-    - '${file(aurora.yaml)}'
+    - ${file(resources/vpc.yaml)}
+    - ${file(resources/rds.yaml)}
+    
