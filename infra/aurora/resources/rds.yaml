@@ -1,0 +1,30 @@
+Resources:
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: eagle-${opt:stage,'dev'}
+      DBName: EagerEagle
+      MasterUsername: postgres
+      MasterUserPassword: RL0UHvxuUYqPckG0sTx8
+      Engine: postgres
+      EngineVersion: "13.3"
+      DBInstanceClass: db.t3.small
+      DBSubnetGroupName: !Ref RDSSubnetGroup
+      VPCSecurityGroups:
+        - !GetAtt RDSSecurityGroup.GroupId
+      AllocatedStorage: 20
+      PubliclyAccessible: true
+      Tags:
+        - Key: "Name"
+          Value: "EagerEagle-RDSDBInstance"
+
+  RDSSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: "EagerEagle RDS subnet group"
+      SubnetIds:
+        - !Ref SubnetA
+        - !Ref SubnetB
+      Tags:
+        - Key: "Name"
+          Value: "EagerEagle-RDSSubnetGroup"

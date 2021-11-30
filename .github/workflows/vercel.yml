@@ -1,4 +1,4 @@
-name: Test & Deploy
+name: Vercel Test & Deploy
 on:
   pull_request:
   workflow_dispatch:
@@ -15,7 +15,7 @@ jobs:
 
       - name: Test
         run: cd app && npm run test
-  deploy:
+  deployVercel:
     runs-on: ubuntu-latest
     needs: test
     steps:
