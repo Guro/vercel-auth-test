@@ -2,9 +2,24 @@ service: aurora
 provider:
   name: aws
   region: eu-central-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: "arn:aws:s3:::eagle-uploads-bucket/*"
 
 
 resources:
     - ${file(resources/vpc.yaml)}
     - ${file(resources/rds.yaml)}
-    
+    - ${file(resources/s3.yaml)}
+
+functions:
+  upload:
+    handler: src/handlers/upload.handler
+    events:
+      - http:
+          path: upload
+          method: post
+          cors: true
