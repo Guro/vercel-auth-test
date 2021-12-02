@@ -10,11 +10,14 @@ jobs:
       - uses: actions/setup-node@v2.4.1
       - uses: actions/checkout@v2
 
-      - name: Install serverless
+      - name: Install serverless # we can use serverless action in the future to skip this step
         run: npm i serverless -g
 
+      - name: Install dependencies
+        run: cd infra/general/ && yarn
+
       - name: Deploy aurora
-        run: cd infra/aurora/ && serverless deploy
+        run: cd infra/general/ && serverless deploy
 
     env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
