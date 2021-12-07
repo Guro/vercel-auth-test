@@ -2,7 +2,9 @@ name: Vercel Test & Deploy
 on:
   push:
     paths:
-      - 'app/*'
+      - "app/*"
+    branches:
+        - "main"
 
 jobs:
   test:
