@@ -4,7 +4,7 @@ on:
     paths:
       - "app/*"
     branches:
-        - "main"
+      - "main"
 
 jobs:
   test:
