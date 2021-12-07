@@ -3,7 +3,7 @@ Resources:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: Retain
     Properties:
-      BucketName: eagle-uploads-bucket
+      BucketName: eagle-uploads-bucket-${opt:stage,'dev'}
       AccessControl: PublicRead
       CorsConfiguration:
         CorsRules:

@@ -4,7 +4,7 @@ Resources:
     Properties:
       Tags:
       - Key: "Name"
-        Value: "EagerEagle-InternetGateway"
+        Value: EagerEagle-InternetGateway-${opt:stage,'dev'}
 
   VPC:
     Type: AWS::EC2::VPC
@@ -22,7 +22,7 @@ Resources:
       VpcId: !Ref VPC
       Tags:
       - Key: "Name"
-        Value: "EagerEagle-RouteTable"
+        Value: EagerEagle-RouteTable-${opt:stage,'dev'}
 
   InternetGatewayRoute:
       Type: AWS::EC2::Route
@@ -45,7 +45,7 @@ Resources:
       CidrBlock: 10.0.0.0/24
       Tags:
         - Key: "Name"
-          Value: "EagerEagle-SubnetA"
+          Value: EagerEagle-SubnetA-${opt:stage,'dev'}
 
   SubnetARouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -61,7 +61,7 @@ Resources:
       CidrBlock: 10.0.1.0/24
       Tags:
         - Key: "Name"
-          Value: "EagerEagle-SubnetB"
+          Value: EagerEagle-SubnetB-${opt:stage,'dev'}
 
   SubnetBRouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -81,4 +81,4 @@ Resources:
           CidrIp: "0.0.0.0/0"
       Tags:
         - Key: "Name"
-          Value: "EagerEagle--RDSSecurityGroup"
+          Value: EagerEagle-RDSSecurityGroup-${opt:stage,'dev'}

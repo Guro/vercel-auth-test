@@ -1,7 +1,8 @@
 name: Infra deploy
 on:
-  pull_request:
-  workflow_dispatch:
+  push:
+    paths:
+      - 'infra/general/*'
 
 jobs:
   sls-deploy:
@@ -16,8 +17,8 @@ jobs:
       - name: Install dependencies
         run: cd infra/general/ && yarn
 
-      - name: Deploy aurora
-        run: cd infra/general/ && serverless deploy
+      - name: Deploy
+        run: cd infra/general/ && serverless deploy --verbose
 
     env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

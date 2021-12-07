@@ -16,7 +16,7 @@ Resources:
       PubliclyAccessible: true
       Tags:
         - Key: "Name"
-          Value: "EagerEagle-RDSDBInstance"
+          Value: EagerEagle-RDSDBInstance-${opt:stage,'dev'}
 
   RDSSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
@@ -27,4 +27,4 @@ Resources:
         - !Ref SubnetB
       Tags:
         - Key: "Name"
-          Value: "EagerEagle-RDSSubnetGroup"
+          Value: EagerEagle-RDSSubnetGroup-${opt:stage,'dev'}

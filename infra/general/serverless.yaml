@@ -1,4 +1,4 @@
-service: aurora
+service: eagereagle
 provider:
   name: aws
   region: eu-central-1
@@ -7,7 +7,7 @@ provider:
       Action:
         - s3:PutObject
         - s3:PutObjectAcl
-      Resource: "arn:aws:s3:::eagle-uploads-bucket/*"
+      Resource: arn:aws:s3:::eagle-uploads-bucket-${opt:stage,'dev'}/*
 
 
 resources:
