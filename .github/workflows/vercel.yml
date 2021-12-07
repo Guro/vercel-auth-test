@@ -2,7 +2,7 @@ name: Vercel Test & Deploy
 on:
   push:
     paths:
-      - 'infra/app/*'
+      - 'app/*'
 
 jobs:
   test:
