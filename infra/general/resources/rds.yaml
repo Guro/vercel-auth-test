@@ -28,3 +28,7 @@ Resources:
       Tags:
         - Key: "Name"
           Value: EagerEagle-RDSSubnetGroup-${opt:stage,'dev'}
+  Outputs:
+    InstanceId:
+      Description: InstanceId of the newly created RDS Instance
+      Value: !Ref RDSInstance      
